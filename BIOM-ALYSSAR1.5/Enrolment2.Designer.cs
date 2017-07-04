@@ -39,6 +39,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.enrolment2UserControl1 = new BIOM_ALYSSAR1._5.Enrolment2UserControl();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,11 +143,19 @@
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // enrolment2UserControl1
+            // 
+            this.enrolment2UserControl1.Location = new System.Drawing.Point(684, 54);
+            this.enrolment2UserControl1.Name = "enrolment2UserControl1";
+            this.enrolment2UserControl1.Size = new System.Drawing.Size(248, 403);
+            this.enrolment2UserControl1.TabIndex = 43;
+            // 
             // Enrolment2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 503);
+            this.Controls.Add(this.enrolment2UserControl1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -179,5 +188,6 @@
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
+        private Enrolment2UserControl enrolment2UserControl1;
     }
 }

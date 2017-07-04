@@ -36,6 +36,7 @@
             this.division = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clockOutUserControl1 = new BIOM_ALYSSAR1._5.ClockOutUserControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +49,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(881, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1094, 33);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,7 +69,7 @@
             this.division,
             this.timeIn,
             this.timeOut});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 113);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 69);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(710, 337);
@@ -103,11 +104,20 @@
             this.timeOut.Name = "timeOut";
             this.timeOut.Width = 120;
             // 
+            // clockOutUserControl1
+            // 
+            this.clockOutUserControl1.IsVerificationComplete = false;
+            this.clockOutUserControl1.Location = new System.Drawing.Point(763, 69);
+            this.clockOutUserControl1.Name = "clockOutUserControl1";
+            this.clockOutUserControl1.Size = new System.Drawing.Size(257, 442);
+            this.clockOutUserControl1.TabIndex = 16;
+            // 
             // ClockOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(881, 496);
+            this.ClientSize = new System.Drawing.Size(1094, 496);
+            this.Controls.Add(this.clockOutUserControl1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ClockOut";
@@ -130,5 +140,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn division;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeOut;
+        private ClockOutUserControl clockOutUserControl1;
     }
 }

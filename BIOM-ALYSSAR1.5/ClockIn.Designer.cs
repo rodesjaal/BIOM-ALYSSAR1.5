@@ -35,6 +35,7 @@
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.division = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clockInUserControl1 = new BIOM_ALYSSAR1._5.ClockInUserControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +48,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(789, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1133, 33);
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -95,11 +96,20 @@
             this.timeIn.Name = "timeIn";
             this.timeIn.Width = 120;
             // 
+            // clockInUserControl1
+            // 
+            this.clockInUserControl1.IsVerificationComplete = false;
+            this.clockInUserControl1.Location = new System.Drawing.Point(821, 107);
+            this.clockInUserControl1.Name = "clockInUserControl1";
+            this.clockInUserControl1.Size = new System.Drawing.Size(265, 471);
+            this.clockInUserControl1.TabIndex = 15;
+            // 
             // ClockIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 558);
+            this.ClientSize = new System.Drawing.Size(1133, 558);
+            this.Controls.Add(this.clockInUserControl1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ClockIn";
@@ -121,5 +131,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn division;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeIn;
+        private ClockInUserControl clockInUserControl1;
     }
 }

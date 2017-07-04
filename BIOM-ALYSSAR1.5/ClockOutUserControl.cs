@@ -18,22 +18,30 @@ namespace BIOM_ALYSSAR1._5
         public ClockOutUserControl()
         {
             InitializeComponent();
-            getAttendance();
+           // getAttendance1();
             this.Load += new EventHandler(FingerPrintVerificationUserControl_Load);
             this.HandleDestroyed += new EventHandler(FingerPrintVerificationUserControl_HandleDestroyed);
+
         }
-        public void getAttendance()
+        protected void getAttendance1()
         {
-            //  string constring = @"Server=localhost; Database=sdtestdb; UID =root; PWD=1234;";
-            MySqlConnection con = new MySqlConnection(Helper.GetConnection());
+            string constring = @"Server=localhost; Database=sdtestdb; UID =root; PWD=1234;";
+            MySqlConnection con = new MySqlConnection(constring);
             MySqlCommand com = new MySqlCommand();
             com.Connection = con;
-            com.CommandText = "SELECT employeeID, firstName, lastName, division, timeIn, timeOut FROM employee " +
+            com.CommandText = "SELECT employeeID, firstName, middleName, lastName, division, timeIn FROM employee " +
                                 "INNER JOIN employeeattendance ON employee.employeeID = employeeattendance.employee_employeeID ORDER BY employeeattendanceID desc";
             com.CommandType = CommandType.Text;
             MySqlDataAdapter da = new MySqlDataAdapter(com);
             DataTable dt = new DataTable();
             da.Fill(dt);
+
+            ////Set AutoGenerateColumns False
+            //dataGridView1.AutoGenerateColumns = false;
+
+            ////Set Columns Count
+            //dataGridView1.ColumnCount = 5;
+
         }
         private bool isVerificationComplete = false;
         public bool IsVerificationComplete
@@ -58,14 +66,16 @@ namespace BIOM_ALYSSAR1._5
             get;
             private set;
         }
+
+
         private DPFP.Capture.Capture Capturer;
         public Dictionary<DPFP.Template, int> Samples = new Dictionary<DPFP.Template, int>();
-        // public Dictionary<int[], int> SamplesID = new Dictionary<int[], int>();
         private DPFP.Verification.Verification Verificator;
 
         public event StatusChangedEventHandler VerificationStatusChanged;
 
         delegate void Function();
+
         #region Form Event Handlers:
         private void FingerPrintVerificationUserControl_Load(object sender, EventArgs e)
         {
@@ -79,6 +89,7 @@ namespace BIOM_ALYSSAR1._5
         }
 
         #endregion
+
         #region FingerPrint Handlers
 
         protected virtual void Process(DPFP.Sample Sample)
@@ -101,6 +112,10 @@ namespace BIOM_ALYSSAR1._5
                     Verificator.Verify(features, template, ref result);
                     if (result.Verified)
                     {
+                        /* this.VerifiedObject = Samples[template];
+                         verified = true;
+                         SetPrompt("Verified.");
+                         Stop();*/
                         this.VerifiedObject = Samples[template];
                         //
                         int value = 0;
@@ -108,10 +123,11 @@ namespace BIOM_ALYSSAR1._5
                         bool hasValue = Samples.TryGetValue(template, out value);
                         if (hasValue)
                             Model.employeeNo = value.ToString();
-                        //MessageBox.Show("EmployeeID: " + Model.employeeNo);
+                        // MessageBox.Show("EmployeeID: " + Model.employeeNo);
                         insertAttendanceTimeIn(Model.employeeNo);
                         verified = true;
                         SetPrompt("Verified.");
+
                         //Stop();
                     }
                 }
@@ -133,23 +149,34 @@ namespace BIOM_ALYSSAR1._5
         }
         private void insertAttendanceTimeIn(string employeeid)
         {
-            //  string constring = @"Server=localhost; Database=sdtestdb; UID =root; PWD=1234;";
+            // string constring = @"Server=localhost; Database=sdtestdb; UID =root; PWD=1234;";
             using (MySqlConnection con = new MySqlConnection(Helper.GetConnection()))
             {
                 con.Open();
-                string query = @"UPDATE employeeattendance SET timeOut=@timeOut WHERE employee_employeeID=@empID";
+                string query = @"INSERT INTO employeeattendance (timeIn, employee_employeeID) VALUES (@timeIn, @empID); " +
+                    " DELETE FROM employeeattendance " +
+                       "  WHERE employeeattendanceid in " +
+                            " (SELECT *  FROM	(SELECT max(employeeattendanceid) " +
+                                            " FROM employeeattendance " +
+                                            " WHERE DATE_FORMAT(timeIn, '%Y-%m-%d') = curdate() " +
+                                            "GROUP BY employee_employeeID HAVING (COUNT(*) > 1) " +
+
+                    ") as c)";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
 
-                    // MessageBox.Show(Model.employeeNo);
-                    cmd.Parameters.AddWithValue("@timeOut", DateTime.Now);
+                    //MessageBox.Show(Model.employeeNo);
+                    cmd.Parameters.AddWithValue("@timeIn", DateTime.Now);
                     cmd.Parameters.AddWithValue("@empID", employeeid);
                     cmd.ExecuteNonQuery();
+                    MessageBox.Show("Time in succesful.");
 
+
+                    //InitializeComponent();
                 }
 
             }
-            MessageBox.Show("Successful time out!");
+            //  Process(Sample);
         }
         protected virtual void Init()
         {
@@ -241,6 +268,9 @@ namespace BIOM_ALYSSAR1._5
         }
 
         #endregion
+
+
+
         private void SetPrompt(string prompt)
         {
             this.Invoke(new Function(delegate ()
@@ -265,13 +295,12 @@ namespace BIOM_ALYSSAR1._5
             }));
         }
 
-        private void ClearFPSamples_Click(object sender)
+        private void ClearFPSamples_Click(object sender, EventArgs e)
         {
             this.IsVerificationComplete = false;
             SetPrompt("Give fingerprint sample.");
             FingerPrintPicture.Image = null;
             Start();
         }
-
     }
 }

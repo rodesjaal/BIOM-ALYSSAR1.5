@@ -37,7 +37,7 @@
             // 
             this.Prompt.AutoSize = true;
             this.Prompt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Prompt.Location = new System.Drawing.Point(10, 312);
+            this.Prompt.Location = new System.Drawing.Point(31, 318);
             this.Prompt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Prompt.Name = "Prompt";
             this.Prompt.Size = new System.Drawing.Size(56, 20);
@@ -48,7 +48,7 @@
             // 
             this.FingerPrintPicture.BackColor = System.Drawing.SystemColors.Window;
             this.FingerPrintPicture.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.FingerPrintPicture.Location = new System.Drawing.Point(14, 19);
+            this.FingerPrintPicture.Location = new System.Drawing.Point(20, 23);
             this.FingerPrintPicture.Name = "FingerPrintPicture";
             this.FingerPrintPicture.Size = new System.Drawing.Size(217, 278);
             this.FingerPrintPicture.TabIndex = 33;
@@ -61,7 +61,7 @@
             this.Controls.Add(this.Prompt);
             this.Controls.Add(this.FingerPrintPicture);
             this.Name = "ClockOutUserControl";
-            this.Size = new System.Drawing.Size(253, 424);
+            this.Size = new System.Drawing.Size(257, 442);
             ((System.ComponentModel.ISupportInitialize)(this.FingerPrintPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
